@@ -1,8 +1,9 @@
 <app-mat-table-generic 
   [data]="data" 
-  [buttons]="buttons"
+  [icons]="icons"
   [columns]="columns" 
   [tableMinWidth]="400"
   (buttonClick)="buttonClick($event)"
+  (paginatorChange)="onPaginatorChange($event)"
 >
 </app-mat-table-generic>

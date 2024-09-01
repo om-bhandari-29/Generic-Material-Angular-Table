@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { TableBtn, TableColumn } from '../../shared/model/matTable.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class MatTableGenericComponent {
   @Input() columns: TableColumn[] = [];
-  @Input() buttons: TableBtn[] = [];
+  @Input() icons: TableBtn[] = [];
   @Input() data: any[] = [];
   @Input() filter: boolean = false;
   @Input() filterPlaceholder: string = 'Filter';
@@ -21,6 +21,11 @@ export class MatTableGenericComponent {
   @Input() tableMinWidth: number = 500;
   @Output() filteredData = new EventEmitter<any[]>();
   @Output() buttonClick = new EventEmitter<string[]>();
+  @Output() paginatorChange = new EventEmitter<PageEvent>();
+
+
+  public currentPage: number = 1;
+  public itemsPerPage: number = 5;
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns!: string[];
@@ -35,13 +40,13 @@ export class MatTableGenericComponent {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.displayedColumns = [...this.columns.map((c) => c.columnDef)];
-        if (this.buttons.length > 0)
+        if (this.icons.length > 0)
           this.displayedColumns = [...this.displayedColumns, 'actions'];
       }
     }
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.filteredData.emit(this.dataSource.filteredData);
 
@@ -50,5 +55,13 @@ export class MatTableGenericComponent {
     }
 
     this.dataSource.sort = this.sort;
+  }
+
+  public onPaginatorChange(event: PageEvent){
+    console.log(event);
+
+    this.currentPage = event.pageIndex+1;
+    this.itemsPerPage = event.pageSize;
+    this.paginatorChange.emit(event);
   }
 }

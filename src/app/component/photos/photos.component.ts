@@ -25,40 +25,43 @@ export class PhotosComponent extends BaseComponent implements OnInit {
 
     this.columns = [
       {
+        styleClass: '',
         columnDef: 'index',
         header: 'No.',
         cell: (element: RPhotos) => `${element.albumId}`,
       },
       {
+        styleClass: '',
         columnDef: 'albumId',
         header: 'Album Id',
         cell: (element: RPhotos) => `${element.albumId}`,
       },
       {
+        styleClass: '',
         columnDef: 'id',
         header: 'Id',
         cell: (element: RPhotos) => `${element.id}`,
       },
-      {
-        columnDef: 'title',
-        header: 'Title',
-        cell: (element: RPhotos) => `${element.title}`,
-      },
-      {
-        columnDef: 'url',
-        header: 'URL',
-        cell: (element: RPhotos) => `${element.url}`,
-      },
-      {
-        columnDef: 'thumbnailUrl',
-        header: 'Thumbnail',
-        cell: (element: RPhotos) => `${element.thumbnailUrl}`,
-      },
-      {
-        columnDef: 'action',
-        header: 'Action',
-        cell: (element: RPhotos) => `${element.thumbnailUrl}`,
-      },
+      // {
+      //   columnDef: 'title',
+      //   header: 'Title',
+      //   cell: (element: RPhotos) => `${element.title}`,
+      // },
+      // {
+      //   columnDef: 'url',
+      //   header: 'URL',
+      //   cell: (element: RPhotos) => `${element.url}`,
+      // },
+      // {
+      //   columnDef: 'thumbnailUrl',
+      //   header: 'Thumbnail',
+      //   cell: (element: RPhotos) => `${element.thumbnailUrl}`,
+      // },
+      // {
+      //   columnDef: 'action',
+      //   header: 'Action',
+      //   cell: (element: RPhotos) => `${element.thumbnailUrl}`,
+      // },
     ];
 
     this.buttons = [

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RPost } from '../../shared/response/post.response';
 import { TableBtn, TableColumn } from '../../shared/model/matTable.model';
 import { BaseComponent } from '../../shared/BaseComponent.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-post',
@@ -13,38 +14,40 @@ export class PostComponent extends BaseComponent implements OnInit {
 
   public introText = 'Button actions and payloads come here in textual form';
   public columns: TableColumn[] = [];
-  public buttons: TableBtn[] = [];
+  public icons: TableBtn[] = [];
   public data: RPost[] = [];
   public totalVolume: number = 0;
   public totalRides: number = 0;
   public footer: string = '';
 
+  public onPaginatorChange(event: PageEvent){
+    console.log(event);
+  }
+
   constructor() {
     super();
     this.columns = [
-      // {
-      //   columnDef: 'id',
-      //   header: 'Id',
-      //   cell: (element: RPost) => `${element.id}`,
-      // },
       {
+        styleClass: '',
+        columnDef: 'index',
+        header: 'No',
+        cell: (element: RPost) => `${element.title}`,
+      },
+      {
+        styleClass: '',
         columnDef: 'title',
         header: 'Title',
         cell: (element: RPost) => `${element.title}`,
       },
-      // {
-      //   columnDef: 'userId',
-      //   header: 'User Id',
-      //   cell: (element: RPost) => `${element.userId}`,
-      // },
       {
+        styleClass: '',
         columnDef: 'body',
         header: 'Body',
         cell: (element: RPost) => `${element.body}`,
       },
     ];
 
-    this.buttons = [
+    this.icons = [
       {
         styleClass: 'btn btn-success px-2',
         icon: 'bi bi-trash text-red',
